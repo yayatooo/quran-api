@@ -13,8 +13,8 @@ export default function Home() {
         <h1 className="text-5xl text-primary py-4">Al-Qur'an Online</h1>
         <p className="text-xl ">Baca Al-Qur'an secara Online dimana dan kapanpun saja dengan mudah</p>
         <div className="py-8 flex gap-x-5">
-          <Link href='/surah' className="bg-blue-secondary text-white py-3 px-6 rounded-lg">Surah</Link>
-          <Link href="https://github.com/yayatooo" className="bg-blue-secondary text-white py-3 px-6 rounded-lg">Kunjungi</Link>
+          <Link href='/surah' className="bg-blue-secondary text-white py-3 px-6 rounded-lg hover:bg-yellow-primary hover:text-primary">Surah</Link>
+          <Link href="https://github.com/yayatooo" className="bg-blue-secondary text-white py-3 px-6 rounded-lg  hover:bg-yellow-primary hover:text-primary">Kunjungi</Link>
         </div>
       </section>
       <section>

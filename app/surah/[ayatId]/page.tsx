@@ -1,6 +1,9 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { SurahProps, Ayat } from '@/types'
+import Navbar from '@/app/Navbar'
+import { SlActionUndo, SlActionRedo } from "react-icons/sl";
+import { useRouter } from 'next/router';
 
 async function getData(ayatId:string) {
   const res = await fetch(`https://equran.id/api/v2/surat/${ayatId}`)
@@ -8,10 +11,13 @@ async function getData(ayatId:string) {
     return await res.json()
 }
 
+
 export default function AyatPage({ params }: { params: SurahProps }) {
 
   const [surah, setSurah] = useState<SurahProps>({} as SurahProps)
   const [cardSurah, setCardSurah] = useState<Ayat[]>([])
+  const [nextSurah, setNextSurah] = useState(false)
+  const router = useRouter
 
   const getCardSurah = async () => {
     try {
@@ -37,22 +43,35 @@ export default function AyatPage({ params }: { params: SurahProps }) {
     }
   };
 
+  const nextSurahHandler = () => {
+    if(!nextSurah) {
+      const nextAyatId = parseInt(params.ayatId) + 1;
+      // setNextSurah.router.push(`/surah/${nextAyatId}`);
+    }
+  }
+
   useEffect(() => {
     getCardSurah();
     fetchSurah();
 
   },[params.ayatId])
 
-  
+  // (`surah/${surah.nomor}+1`)
 
   return (
+    <> 
+    <Navbar />
     <section className='font-poopins w-full py-12 bg-white'>
       <div className='font-semibold w-10/12 mx-auto'>
         <h1 className='text-4xl pb-6 w-full text-center'>بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</h1>
           <div className='flex justify-between items-center'>
-            <h2 className='py-2 text-xl px-4 bg-primary text-white rounded-lg'>{surah.arti}</h2>
-            <h1 className='py-2 text-3xl px-4 bg-white text-primary rounded-lg w-5/12 text-center'>{surah.namaLatin} </h1>
-            <h2 className='py-2 text-xl px-4 bg-primary text-white rounded-lg'>{surah.tempatTurun}</h2>
+            <h2 className='py-2 text-xl px-4 bg-primary text-white rounded-lg w-2/12 text-center'>{surah.arti}</h2>
+            <div className='flex justify-between items-center w-5/12'>
+              <button type='button' className='text-xl font-semibold' onClick={nextSurahHandler}><SlActionUndo /></button>
+              <h1 className='py-2 text-3xl px-4 bg-white text-primary rounded-lg w-5/12 text-center'>{surah.namaLatin} </h1>
+              <button className='text-xl font-semibold'><SlActionRedo /></button>
+            </div>
+            <h2 className='py-2 text-xl px-4 bg-primary text-white rounded-lg w-2/12 text-center'>{surah.tempatTurun}</h2>
           </div>
         <div className='py-8'>
           <div className='flex flex-col gap-y-6' >
@@ -74,5 +93,6 @@ export default function AyatPage({ params }: { params: SurahProps }) {
         </div>
       </div>
     </section>
+    </>
   )
 }

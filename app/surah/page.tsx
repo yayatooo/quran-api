@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import CardSurah from './CardSurah';
 import Navbar from '../Navbar';
+import Loading from './loading';
 
 const pageSurah = () => {
   return (
-    <>   
-     <Navbar />
-     <CardSurah />
+    <> 
+      <Navbar />
+      <Suspense fallback={<Loading />}>        
+        <CardSurah />
+      </Suspense>  
     </>
   );
 };

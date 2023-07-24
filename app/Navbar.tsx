@@ -1,6 +1,6 @@
 import { list } from './utils/data';
 import Link from 'next/link';
-import SearchBar from './SearchBar';
+// import SearchBar from './SearchBar';
 
 const Navbar = () => {
   return (
@@ -17,7 +17,7 @@ const Navbar = () => {
           );
         })}
       </ul>
-      <SearchBar />
+      {/* <SearchBar /> */}
     </nav>
   );
 };

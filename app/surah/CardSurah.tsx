@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { FiList, FiGrid } from 'react-icons/fi';
 import Link from 'next/link';
+import SearchBar from '../SearchBar';
 
 export default function CardSurah() {
   const [dataAlquran, setDataAlquran] = useState([]);
@@ -35,12 +36,7 @@ export default function CardSurah() {
       <section className="flex justify-between text-3xl font-poopins font-semibold px-12 py-16">
         <h1>List Surah</h1>
         <section className="flex gap-x-8">
-          <button>
-            <FiList />
-          </button>
-          <button>
-            <FiGrid />
-          </button>
+          <SearchBar />
         </section>
       </section>
 
